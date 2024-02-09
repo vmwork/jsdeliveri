@@ -16,50 +16,57 @@ export interface Ipackadge {
 const pakedges = ref(<Ipackadge>[]);
 const pack = ref<Ipackadge>();
 const loading = ref(false);
-const page = ref("1");
+const paginationLimit = ref(10);
 export default () => {
-  const getTopPackedges = async () => {
+  const stapLoading = () => {
+    loading.value = false;
+  };
+  const getTopPackedges = async (page = 1) => {
     const path = "stats/packages";
     const period = "week";
     const limit = "10";
-
+    loading.value = true;
     try {
       const response = await fetch(
         `${
           import.meta.env.VITE_API
-        }${path}?period=${period}&limit=${limit}&page${page.value}`
+        }${path}?period=${period}&limit=${limit}&page=${page}`
       );
-      // if (response.status === 200 || response.status === "200") {
-      const result = await response.json();
-      pakedges.value = result;
-
-      // }
+      if (response.status === 200 || response.status === "200") {
+        const result = await response.json();
+        console.log(result);
+        pakedges.value = result;
+        // paginationLimit.value = pakedges.value.length / +limit;
+      }
     } catch (error) {
       console.log(error);
+    } finally {
+      setTimeout(stapLoading, 500);
     }
   };
 
   const getPackedge = async (querry: string) => {
     loading.value = true;
     const path = `packages/npm/${querry}`;
-    console.log(querry);
-
     try {
       const response = await fetch(`${import.meta.env.VITE_API}${path}`);
       if (response.status === 200 || response.status === "200") {
         const result = await response.json();
-        console.log(result);
         pack.value = result;
       }
     } catch (error) {
       console.log(error);
     } finally {
-      const stapLoading = () => {
-        loading.value = false;
-      };
       setTimeout(stapLoading, 500);
     }
   };
 
-  return { loading, pack, pakedges, getTopPackedges, getPackedge };
+  return {
+    loading,
+    paginationLimit,
+    pack,
+    pakedges,
+    getTopPackedges,
+    getPackedge,
+  };
 };
