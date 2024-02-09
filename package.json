@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "cross-env NODE_OPTIONS='--no-warnings' vite",
+    "start": "cross-env NODE_OPTIONS='--no-warnings' vite",
     "build": "vue-tsc --noEmit && vite build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
