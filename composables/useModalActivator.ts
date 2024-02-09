@@ -1,10 +1,14 @@
 import { ref } from "vue";
+import type { Ipackadge } from "../models/IPackadge";
 const isActive = ref(false);
-const packedgeData = ref([]);
+const packedgeData = ref();
 export default () => {
-  const togleModal = (data) => {
-    isActive.value = !isActive.value;
+  const openModal = (data: Ipackadge) => {
+    isActive.value = true;
     packedgeData.value = data;
   };
-  return { togleModal, isActive, packedgeData };
+  const closeModal = () => {
+    isActive.value = false;
+  };
+  return { openModal, closeModal, isActive, packedgeData };
 };

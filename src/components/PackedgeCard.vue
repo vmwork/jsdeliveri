@@ -16,12 +16,12 @@
 
           <v-card-text>Bandwidth: {{ packedgeData.bandwidth }}</v-card-text>
         </div>
-        <a :href="packedgeData.links.self">links.self </a>
-        <a :href="packedgeData.links.versions">links.self </a>
+        <a :href="packedgeData.links.self" target="_blank">Link my self</a>
+        <a :href="packedgeData.links.versions" target="_blank"
+          >Check versions
+        </a>
 
-        <v-btn class="mt-10" block @click="togleModal(packedgeData)"
-          >Close
-        </v-btn>
+        <v-btn class="mt-10" block @click="closeModal">Close </v-btn>
       </v-card>
     </v-dialog>
   </div>
@@ -29,5 +29,5 @@
 
 <script setup lang="ts">
 import useModalActivator from "../../composables/useModalActivator";
-const { isActive, togleModal, packedgeData } = useModalActivator();
+const { isActive, closeModal, packedgeData } = useModalActivator();
 </script>

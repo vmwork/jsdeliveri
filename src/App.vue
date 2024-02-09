@@ -1,9 +1,6 @@
 <template>
   <v-app class="bg-grey-darken-4">
-    <v-main>
-      <Layout></Layout>
-      <router-view />
-    </v-main>
+    <Layout> </Layout>
   </v-app>
 </template>
 

@@ -1,10 +1,5 @@
 <template>
-  <v-container class="pt-0">
-    <div>
-      <MainContent />
-    </div>
+  <v-container>
+    <MainContent />
   </v-container>
 </template>
-<script setup lang="ts">
-//
-</script>
